@@ -107,7 +107,8 @@ func (n nfsDriver) fixSource(name, id string) string {
 }
 
 func (n nfsDriver) mountVolume(source, dest string, version int) error {
-	var cmd string mkdir_cmd
+	var cmd string
+  var mkdir_cmd string
 
 	options := merge(n.mountm.GetOptions(dest), n.nfsopts)
 	opts := ""
