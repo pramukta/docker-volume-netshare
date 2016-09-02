@@ -37,7 +37,7 @@ func NewNFSDriver(root string, version int, nfsopts string) nfsDriver {
 }
 
 func (n nfsDriver) Mount(r volume.MountRequest) volume.Response {
-	log.Debugf("Entering Mount: %v", r)
+	log.Debugf("Entering Modified Mount: %v", r)
 	n.m.Lock()
 	defer n.m.Unlock()
 	hostdir := mountpoint(n.root, r.Name)
@@ -107,7 +107,7 @@ func (n nfsDriver) fixSource(name, id string) string {
 }
 
 func (n nfsDriver) mountVolume(source, dest string, version int) error {
-	var cmd string
+	var cmd string mkdir_cmd
 
 	options := merge(n.mountm.GetOptions(dest), n.nfsopts)
 	opts := ""
@@ -136,6 +136,9 @@ func (n nfsDriver) mountVolume(source, dest string, version int) error {
 			cmd = fmt.Sprintf("%s -t nfs4 %s %s", mountCmd, source, dest)
 		}
 	}
+  mkdir_cmd = fmt.Sprintf("mkdir -p %s", dest)
+  log.Debugf("exec: %s\n", mkdir_cmd)
+  run(mkdir_cmd)
 	log.Debugf("exec: %s\n", cmd)
 	return run(cmd)
 }
