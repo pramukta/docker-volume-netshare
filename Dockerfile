@@ -6,5 +6,5 @@ FROM golang:1.5
 COPY . /go/src/app
 WORKDIR /go/src/app
 ENV GO15VENDOREXPERIMENT 1
-RUN go-wrapper download && go-wrapper install && go build main.go -o docker-volume-netshare && cp docker-volume-netshare /bin
+RUN go-wrapper download && go-wrapper install && go build -o docker-volume-netshare && cp docker-volume-netshare /bin
 ENTRYPOINT ["/bin/docker-volume-netshare"]
