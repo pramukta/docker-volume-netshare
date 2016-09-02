@@ -134,7 +134,7 @@ func (n nfsDriver) mountVolume(source, dest string, version int) error {
 		if len(opts) > 0 {
 			cmd = fmt.Sprintf("%s -t nfs -o %s %s %s", mountCmd, opts, source, dest)
 		} else {
-			cmd = fmt.Sprintf("%s -t nfs4 %s %s", mountCmd, source, dest)
+			cmd = fmt.Sprintf("%s -t nfs %s %s", mountCmd, source, dest)
 		}
 	}
   mkdir_cmd = fmt.Sprintf("mkdir -p %s", dest)
