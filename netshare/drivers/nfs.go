@@ -132,7 +132,7 @@ func (n nfsDriver) mountVolume(source, dest string, version int) error {
 	default:
 		log.Debugf("Mounting with NFSv4 - src: %s, dest: %s", source, dest)
 		if len(opts) > 0 {
-			cmd = fmt.Sprintf("%s -t nfs4 -o %s %s %s", mountCmd, opts, source, dest)
+			cmd = fmt.Sprintf("%s -t nfs -o %s %s %s", mountCmd, opts, source, dest)
 		} else {
 			cmd = fmt.Sprintf("%s -t nfs4 %s %s", mountCmd, source, dest)
 		}
